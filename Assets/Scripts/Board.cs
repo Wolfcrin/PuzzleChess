@@ -28,7 +28,7 @@ public class Board : MonoBehaviour
                 GameObject newCell = Instantiate(cellPrefabs);
                 newCell.transform.position = new Vector2(gameObject.transform.position.x + x, gameObject.transform.position.y + y);
                 newCell.name = $"Cell {x} {y}";
-                newCell.transform.parent = null;
+                newCell.transform.SetParent(null);
 
                 // Setup
                 _cells[x, y] = newCell.GetComponent<Cell>();
@@ -48,11 +48,13 @@ public class Board : MonoBehaviour
             }
         }
 
-        GameObject.FindObjectOfType<CellManager>().CreateCellPath(new Vector2Int(1, 1),0,1,0,7);
-        GameObject.FindObjectOfType<CellManager>().CreateCellPath(new Vector2Int(1, 1),0,-1,0,7);
 
-        GameObject.FindObjectOfType<CellManager>().CreateCellPath(new Vector2Int(1, 1),0, 0, 1, 7);
-        GameObject.FindObjectOfType<CellManager>().CreateCellPath(new Vector2Int(1, 1),0, 0, -1, 7);
+
+        // GameObject.FindObjectOfType<CellManager>().CreateCellPath(new Vector2Int(1, 1),0,1,0,7);
+        // GameObject.FindObjectOfType<CellManager>().CreateCellPath(new Vector2Int(1, 1),0,-1,0,7);
+
+        // GameObject.FindObjectOfType<CellManager>().CreateCellPath(new Vector2Int(1, 1),0, 0, 1, 7);
+        // GameObject.FindObjectOfType<CellManager>().CreateCellPath(new Vector2Int(1, 1),0, 0, -1, 7);
 
         //GameObject.FindObjectOfType<CellManager>().CreateCellPath(new Vector2Int(1, 1), 1, 1, 7);
         //GameObject.FindObjectOfType<CellManager>().CreateCellPath(new Vector2Int(1, 1), -1,1, 7);

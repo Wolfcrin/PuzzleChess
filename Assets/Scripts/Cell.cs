@@ -29,6 +29,7 @@ public class Cell : MonoBehaviour
     public SpriteRenderer outlineImage;
 
     public Vector2Int BoardPosition { get => _boardPosition; set => _boardPosition = value; }
+    public RectTransform RectTransform { get => _rectTransform; }
 
     public void Awake()
     {
@@ -56,11 +57,11 @@ public class Cell : MonoBehaviour
         outlineImage.enabled = false;
     }
 
-    //public void RemovePiece()
-    //{
-    //    if (currentPiece != null)
-    //        currentPiece.Kill();
-    //}
+    public void RemovePiece()
+    {
+        if (currentPiece != null)
+            currentPiece.Kill();
+    }
 
 
 }

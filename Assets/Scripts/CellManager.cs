@@ -6,14 +6,14 @@ public class CellManager : MonoBehaviour
 {
     public Board board = null;
 
-    private List<Cell> _lightedCells = new List<Cell>();
+    public List<Cell> lightedCells = new List<Cell>();
 
     private void Awake()
     {
         board = GameObject.FindObjectOfType<Board>();
     }
 
-    public CellState ValidateCell(int targetX, int targetY, int faction)
+    public CellState ValidateCell(int targetX, int targetY, Factions faction)
     {
         // Para no salir de los bordes del tablero
         if (targetX < 0 || targetX > 7)
@@ -40,9 +40,14 @@ public class CellManager : MonoBehaviour
         return CellState.Empty;
     }
 
+    public Cell GetCellByXY(int x, int y)
+    {
+        return board._cells != null ? board._cells[x, y] : null;
+    }
+
     public void CreateCellPath(
         Vector2Int cellPosition, // posicion inicial de la celda
-        int faction,    // la faccion de la pieza
+        Factions faction,    // la faccion de la pieza
         int xDirection, // la direccion en X a donde va a buscar
         int yDirection, // la direccion en Y en donde va a buscar
         int movement)    // la cantidad de movimientos
@@ -64,7 +69,7 @@ public class CellManager : MonoBehaviour
             //  SI es un enemigo en la celda terminamos el for de esta linea
             if (cellState == CellState.Enemy)
             {
-                _lightedCells.Add(board._cells[currentX, currentY]);
+                lightedCells.Add(board._cells[currentX, currentY]);
                 break;
             }
 
@@ -73,23 +78,23 @@ public class CellManager : MonoBehaviour
                 break;
 
             // Agregamos la celda 
-            _lightedCells.Add(board._cells[currentX, currentY]);
+            lightedCells.Add(board._cells[currentX, currentY]);
         }
 
         ShowCells();
     }
 
-    protected void ShowCells()
+    public void ShowCells()
     {
-        foreach (Cell cell in _lightedCells)
+        foreach (Cell cell in lightedCells)
             cell.ShowOutline();
     }
 
-    protected void ClearCells()
+    public void HideCells()
     {
-        foreach (Cell cell in _lightedCells)
+        foreach (Cell cell in lightedCells)
             cell.HideOutline();
 
-        _lightedCells.Clear();
+        lightedCells.Clear();
     }
 }
